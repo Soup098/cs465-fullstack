@@ -1,10 +1,40 @@
 <!DOCTYPE html>
-<!-- Website template by freewebsitetemplates.com -->
 <html>
   <head>
     <meta charset="UTF-8" />
     <title>Travlr Getaways Website Template</title>
     <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    
+    <script>
+    // compile the template
+    var template = Handlebars.compile("Handlebars <b>{{doesWhat}}</b>");
+    
+    var people = Handlebars.compile("{{#list people}} {{firstName}} {{lastName}} {{/list}}")
+
+    Handlebars.registerHelper("list", function(items, options){
+        const itemsAsHtml = items.map(item => "<li>" + options.fn(item) + "</li>")
+        return "<ul>\n" + itemsAsHtml.join("\n") + "\n</ul>"
+    })
+
+    // execute the compiled template and print the output to the console
+    console.log(people(
+        {
+            people: [
+                {
+                    firstName: "Alex",
+                    lastName: "Surprenant",
+                },
+                {
+                    firstName: "James",
+                    lastName: "McBob",
+                },
+            ],
+        }
+    ));
+    </script>
+
   </head>
   <body>
     <div id="background">
